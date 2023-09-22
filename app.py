@@ -131,6 +131,14 @@ set_model('InstaFlow-0.9B')
 set_base_model("runwayml/stable-diffusion-v1-5")
 
 with gr.Blocks() as gradio_gui:
+    gr.Markdown(
+    """
+    # InstaFlow! One-Step Stable Diffusion with Rectified Flow
+    ## This Huggingface Space provides a demo of one-step InstaFlow-0.9B and measures the inference time. 
+    ## For fair comparison, Stable Difusion 1.5 is shown in parallel.
+    ## 
+    ##
+    """)
     gr.Markdown("Set Input Seed and Text Prompts Here")
     with gr.Row():
         with gr.Column(scale=0.4):
