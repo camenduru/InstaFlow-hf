@@ -60,7 +60,6 @@ def set_new_latent_and_generate_new_image(seed, prompt, negative_prompt="", num_
 def set_new_latent_and_generate_new_image_with_base_model(seed, prompt, num_inference_steps=1, guidance_scale=0.0):
     print('Generate with input seed')
     global base_model
-    global img
     negative_prompt=""
     seed = int(seed)
     num_inference_steps = int(num_inference_steps)
@@ -71,8 +70,6 @@ def set_new_latent_and_generate_new_image_with_base_model(seed, prompt, num_infe
     new_image = base_model.set_new_latent_and_generate_new_image(int(seed), prompt, negative_prompt, int(num_inference_steps), guidance_scale)
     #print('time consumption:', time.time() - t_s) 
     inf_time = time.time() - t_s
-
-    img = copy.copy(new_image[0])
 
     return new_image[0], inf_time
 
