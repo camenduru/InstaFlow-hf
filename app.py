@@ -95,7 +95,7 @@ with gr.Blocks() as gradio_gui:
     """
     # InstaFlow! One-Step Stable Diffusion with Rectified Flow
     ## This Huggingface Space provides a demo of one-step InstaFlow-0.9B and measures the inference time. 
-    ## For fair comparison, Stable Difusion 1.5 is shown in parallel.
+    ## For fair comparison, Stable Diffusion 1.5 is shown in parallel, running on the same GPU.
     ## 
     """)
     gr.Markdown("Set Input Seed and Text Prompts Here")
