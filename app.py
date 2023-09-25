@@ -112,8 +112,8 @@ with gr.Blocks() as gradio_gui:
                 im = gr.Image()
             
             gr.Markdown("Model ID: One-Step InstaFlow-0.9B")
-            inference_time_output = gr.Textbox(value='0.0', label='Inference Time with One-Step Model (Second)')
-            num_inference_steps = gr.Textbox(value='1', label="Number of Inference Steps (can only be 1)")
+            inference_time_output = gr.Textbox(value='0.0', label='Inference Time with One-Step InstaFlow (Second)')
+            num_inference_steps = gr.Textbox(value='1', label="Number of Inference Steps for InstaFlow (can only be 1)")
             guidance_scale = gr.Textbox(value='0.0', label="Guidance Scale for InstaFlow (can only be 0.0)")
 
             new_image_button = gr.Button(value="One-Step Generation with InstaFlow and the Input Seed")
