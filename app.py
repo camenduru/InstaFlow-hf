@@ -25,8 +25,6 @@ def set_model(model_id):
     global model 
     if model_id == "InstaFlow-0.9B":
         model = RF_model("./instaflow_09b.pt")
-    elif model_id == "InstaFlow-1.7B":
-        model = RF_model("./instaflow_17b.pt")
     else:
         raise NotImplementedError
     print('Finished Loading Model!')
@@ -73,24 +71,6 @@ def set_new_latent_and_generate_new_image_with_base_model(seed, prompt, num_infe
     return new_image[0], inf_time
 
 
-def set_new_latent_and_generate_new_image_and_random_seed(seed, prompt, negative_prompt="", num_inference_steps=1, guidance_scale=0.0):
-    print('Generate with a random seed')
-    global model
-    global img
-    seed = np.random.randint(0, 2**32)
-    num_inference_steps = int(num_inference_steps)
-    guidance_scale = float(guidance_scale)
-    print(seed, num_inference_steps, guidance_scale)
-
-    t_s = time.time()
-    new_image = model.set_new_latent_and_generate_new_image(int(seed), prompt, negative_prompt, int(num_inference_steps), guidance_scale)
-    inf_time = time.time() - t_s
-
-    img = copy.copy(new_image[0])
-
-    return new_image[0], seed, inf_time
-
-
 def refine_image_512(prompt):
     print('Refine with SDXL-Refiner (512)')
     global img
@@ -106,21 +86,6 @@ def refine_image_512(prompt):
 
     return new_image
 
-def refine_image_1024(prompt):
-    print('Refine with SDXL-Refiner (1024)')
-    global img
-
-    t_s = time.time()
-    img = torch.tensor(img).unsqueeze(0).permute(0, 3, 1, 2)
-    img = torch.nn.functional.interpolate(img, size=1024, mode='bilinear')
-    img = img.permute(0, 2, 3, 1).squeeze(0).cpu().numpy()
-    new_image = pipe(prompt, image=img).images[0] 
-    print('time consumption:', time.time() - t_s) 
-    new_image = np.array(new_image) * 1.0 / 255.
-
-    img = new_image
-
-    return new_image
 
 set_model('InstaFlow-0.9B')
 set_base_model("runwayml/stable-diffusion-v1-5")
